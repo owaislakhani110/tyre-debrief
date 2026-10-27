@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/raw/
+data/reports.db
+data/manifest.tsv
+.DS_Store
+.env
+
+# Keep sponsor telemetry data private
+data/
+
+# Exclude sponsor-specific testing records
+docs/faithfulness_results.md
+docs/DATA_NOTES.md
+
+# Exclude sample reports
+docs/sample_reports/
+
+# Exclude private session analysis results
+docs/session_results.md

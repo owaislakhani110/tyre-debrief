@@ -1,0 +1,13 @@
+fastapi==0.143.0
+starlette==1.8.0
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32
+pandas==3.0.6
+numpy==2.5.4
+pydantic==2.14.1
+PyYAML==6.0.3
+pytest==9.1.1
+httpx==0.28.1
+python-dotenv==1.2.4
+libxrk==0.13.0
+pyarrow==26.0.0

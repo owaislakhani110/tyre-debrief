@@ -1,0 +1,83 @@
+data:
+  min_speed_kmh: 40
+  min_running_s: 60
+  plausible_temp_c: [5, 150]
+  spike_threshold_c: 15
+  # Race Studio's CSV value is bar x 14.5038^2 (converted twice), so psi = raw / 14.5038. Confirm with Team Plus.
+  pressure_scale_to_psi: 0.068948
+  plausible_pressure_psi: [10, 60]
+  frozen_pressure_mode_share: 0.9
+  min_valid_temp_share: 0.2
+  min_lap_fraction_of_median: 0.6
+
+# Which edge zone 01 faces. Assumed inside, as in Team Plus's camber chart; confirm with Team Plus.
+zone_orientation:
+  LF: inner
+  RF: inner
+  LR: inner
+  RR: inner
+
+off_tread:
+  edge_drop_c: 10
+  max_centre_spread_c: 6
+  max_zones_per_edge: 2
+
+driving_state:
+  straight_max_lat_g: 0.15
+  straight_max_lon_g: 0.3
+  corner_min_lat_g: 0.6
+  min_speed_kmh: 60
+
+temperature_window:
+  low_c: 60
+  high_c: 90
+  peak_hold_s: 0.5
+  min_share_in_window: 0.5
+
+camber:
+  straight_target_inner_minus_outer_c:
+    front: 15
+    rear: 10
+  straight_tolerance_c: 8
+  straight_low_tolerance_c: 5
+  corner_even_tolerance_c: 6
+
+pressure_from_temperature:
+  middle_over_edges_c: 5
+  middle_under_edges_c: 5
+
+pressure:
+  # Typical hot target for a track tyre; the racer's own entry on the form overrides it. Confirm with Team Plus.
+  target_hot_psi: 32
+  default_change_psi: 1.5
+  axle_split_psi: 2.0
+  target_tolerance_psi: 1.0
+
+balance:
+  front_rear_diff_c: 8
+  left_right_diff_c: 8
+
+trend:
+  temp_change_c: 6
+  lap_time_std_s: 1.0
+  warmup_laps_per_stint: 2
+  warmup_cost_s: 1.0
+  min_flying_laps: 3
+
+driver:
+  brake_on_fraction: 0.05
+  brake_on_g: 0.3
+  full_throttle_pct: 95
+  coast_throttle_pct: 5
+  trail_lat_g: 0.5
+  coasting_max_pct: 5
+  style_gap_throttle_pct: 3
+  style_gap_coasting_pct: 1
+  style_gap_trail_pct: 5
+  grip_gap_g: 0.05
+
+severity_weights:
+  high: 3
+  medium: 2
+  low: 1
+  info: 0

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tyre Debrief</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script src="/static/js/common.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/">Tyre Debrief <span>· Wheel Turtle</span></a>
+    <div class="spacer"></div>
+    <span class="pill" id="llm-status">Checking AI…</span>
+    <button class="theme-btn" id="theme-btn" type="button">Theme</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Turn a session into a debrief</h1>
+  <p class="sub">Upload a Wheel Turtle session (the AiM logger's .xrk file or a CSV export) and get a plain-English report on tyre temperatures, camber and pressures.</p>
+
+  <div class="grid-2" style="margin-top:24px">
+    <form class="card" id="upload-form" novalidate>
+      <h2>1 · Session file</h2>
+      <label class="drop" id="drop">
+        <input type="file" id="file" name="file" accept=".csv,.xrk,.xrz,text/csv">
+        <strong>Drop a session file here</strong>
+        <span class="muted small">or click to choose · AiM .xrk logger file or .csv export from Race Studio</span>
+        <div class="file-name" id="file-name"></div>
+      </label>
+
+      <h2 style="margin-top:22px">2 · Car details <span class="muted small">(optional, sharpens the advice)</span></h2>
+      <div class="fields">
+        <label>Make<input type="text" name="make" placeholder="BMW"></label>
+        <label>Model<input type="text" name="model" placeholder="M3 F80"></label>
+        <label>Drivetrain
+          <select name="drivetrain">
+            <option value="">Not sure</option><option>RWD</option><option>FWD</option><option>AWD</option>
+          </select>
+        </label>
+        <label>Session type
+          <select name="session_type">
+            <option value="">—</option><option>Practice</option><option>Qualifying</option><option>Race</option><option>Test day</option>
+          </select>
+        </label>
+        <label class="full">Tyre compound<input type="text" name="tyre_compound" placeholder="e.g. Yokohama A052, semi-slick"></label>
+        <label>Front camber (°)<input type="number" step="0.1" name="camber_front_deg" placeholder="-2.5"></label>
+        <label>Rear camber (°)<input type="number" step="0.1" name="camber_rear_deg" placeholder="-2.0"></label>
+        <label>Front cold pressure (psi)<input type="number" step="0.1" name="cold_pressure_front_psi" placeholder="30"></label>
+        <label>Rear cold pressure (psi)<input type="number" step="0.1" name="cold_pressure_rear_psi" placeholder="28"></label>
+        <label class="full">Target hot pressure (psi) <span class="opt">· from your tyre maker; 32 psi is used if empty</span><input type="number" step="0.1" name="target_hot_pressure_psi" placeholder="32"></label>
+        <label class="full">Notes <span class="opt">(how the car felt)</span><textarea name="notes" placeholder="Pushing wide in turn 4, loose on exit…"></textarea></label>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="submit" type="submit">Generate debrief</button>
+        <div class="progress" id="progress" hidden><div></div></div>
+        <span class="muted small busy" id="phase"></span>
+      </div>
+      <div class="error" id="error" hidden></div>
+    </form>
+
+    <div class="stack">
+      <section class="card" id="samples-card" hidden>
+        <h2>No file handy?</h2>
+        <p class="muted small" style="margin:0">Try a real BMW F80 session from Winton, logged with Team Plus Wheel Turtles.</p>
+        <div class="sample-row">
+          <select id="sample" aria-label="Sample session"></select>
+          <button class="btn ghost" id="run-sample" type="button">Analyse</button>
+        </div>
+      </section>
+      <section class="card">
+        <h2>Previous reports</h2>
+        <ul class="history" id="history"><li class="empty">Loading…</li></ul>
+      </section>
+      <section class="card how">
+        <h2>How it works</h2>
+        <ol>
+          <li>Your CSV is parsed and cleaned: sensor dropouts, spikes and off-tread zones are removed.</li>
+          <li>Per-tyre statistics are computed on straights, in corners and per lap.</li>
+          <li>A rule engine compares them with Team Plus guidance (60–90 °C window, camber and pressure patterns).</li>
+          <li>The AI explains only those verified findings in plain English, with one priority action.</li>
+        </ol>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="/static/js/upload.js"></script>
+</body>
+</html>
